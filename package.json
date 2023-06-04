@@ -1,0 +1,17 @@
+{
+  "name": "discord_bot_mac",
+  "version": "1.0.0",
+  "description": "this is a discord bot made to manage and work over the project of mac HUB",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.42.0"
+  }
+}
