@@ -11,3 +11,7 @@ contribute
 -add documentation
 -imporve file structure
 -imporve read me and comments
+
+
+**important note**
+remember to add comments and maintain project structure and add to discord1.mdj (star uml) in case of any feature its manditory!
