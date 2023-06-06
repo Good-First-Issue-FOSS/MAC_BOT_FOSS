@@ -99,11 +99,11 @@ If you have any questions or feedback, feel free to reach here:
 
 - A. Athithya Ithayan
 - Email: akilanathithyaithayan.com
+- Discord ID:ADIIS007#4032
 
 ## Acknowledgments
 
 I would like to acknowledge the following individuals for their contributions to the project:
 
-- Person 1: Contribution details
-- Person 2: Contribution details
-- ...
+- Person 1: @basic-programmer-python
+- Person 2: @anya-siri
