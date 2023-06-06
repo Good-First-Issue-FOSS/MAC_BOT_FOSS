@@ -1,0 +1,6 @@
+This file is to add the mongo db based operations
+
+to add profile using auth
+to show profile using profile
+to add the tickets and their back data
+so on and so forth!
