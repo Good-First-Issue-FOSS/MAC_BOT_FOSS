@@ -52,15 +52,12 @@ module.exports = {
                     async ele=>{
                         if(confirmation.customId === ele){
                             await confirmation.update({ content: 'Granting Access', components: [] });
-							    // Get the member object from the interaction
     							const member = interaction.member as GuildMember;
 
-							    // Get the role based on the selected project
 							    const role = interaction.guild?.roles.cache.find((r) => r.name === ele);
 
     							if (role) {
     							    try {
-    							        // Add the role to the member
     							        await member.roles.add(role);
     							        await interaction.editReply({ content: 'Thanks for choosing ' + ele, components: [] });
     							    } catch (error) {
