@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listUsers = exports.addUsers = exports.listProject = exports.addProject = void 0;
+exports.listUsers = exports.addUsers = exports.listProjectNames = exports.addProject = void 0;
 const mongodb_1 = require("mongodb");
 function connectToMongoDB() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -27,10 +27,10 @@ function connectToMongoDB() {
         }
     });
 }
-function addProject(user) {
+function addProject(proj) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const data = yield (yield connectToMongoDB()).collection('MAC_BOT_PROJECTS').insertOne({ name: user });
+            const data = yield (yield connectToMongoDB()).collection('MAC_BOT_PROJECTS').insertOne({ name: proj });
             console.log('Project inserted:', data.insertedId);
         }
         catch (error) {
@@ -40,11 +40,15 @@ function addProject(user) {
     });
 }
 exports.addProject = addProject;
-function listProject() {
+function listProjectNames() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const data = yield (yield connectToMongoDB()).collection('MAC_BOT_PROJECTS').find().toArray();
-            console.log('Project inserted:', data);
+            const arr = [];
+            data.forEach(ele => {
+                arr.push(ele.name);
+            });
+            return arr;
         }
         catch (error) {
             console.error('Error inserting document', error);
@@ -52,7 +56,7 @@ function listProject() {
         }
     });
 }
-exports.listProject = listProject;
+exports.listProjectNames = listProjectNames;
 function addUsers(user) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -70,9 +74,8 @@ function listUsers() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const data = yield (yield connectToMongoDB()).collection('MAC_BOT_PROJECTS').find().toArray();
-            data.forEach(ele => {
-                console.log(ele.name);
-            });
+            console.log(data);
+            return data;
         }
         catch (error) {
             console.error('Error inserting document', error);

@@ -27,10 +27,10 @@ export async function addProject(proj:String) {
     }
 }
 
-export async function listProject(): Promise<number[]>{
+export async function listProjectNames(): Promise<string[]>{
     try{
         const data = await (await connectToMongoDB()).collection('MAC_BOT_PROJECTS').find().toArray();
-        const arr: number[] = []
+        const arr: string[] = []
         data.forEach(
             ele=>{
                 arr.push(ele.name);

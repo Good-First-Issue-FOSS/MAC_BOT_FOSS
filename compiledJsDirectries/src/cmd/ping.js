@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const MongoData_1 = require("../data/MongoData");
 const discord_js_1 = require("discord.js");
 const { SlashCommandBuilder } = require('discord.js');
 const wait = require('node:timers/promises').setTimeout;
@@ -45,8 +44,6 @@ module.exports = {
                     yield confirmation.update({ content: `${target.username} has been banned for reason: ${reason}`, components: [] });
                 }
                 else if (confirmation.customId === 'cancel') {
-                    yield (0, MongoData_1.listProject)();
-                    yield (0, MongoData_1.listUsers)();
                     yield confirmation.update({ content: 'Action cancelled', components: [] });
                 }
             }
