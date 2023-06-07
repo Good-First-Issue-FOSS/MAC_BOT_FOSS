@@ -21,7 +21,7 @@ MAC_BOT offers the following commands and functionalities for managing FOSS proj
 
 The `auth` command utilizes OAuth 2.0 for authentication and verification of user profiles. It combines information from Discord and GitHub profiles and stores the user profile data in MongoDB.
 
-Command: `!/auth`
+Command: `/auth`
 
 ### Profile
 
