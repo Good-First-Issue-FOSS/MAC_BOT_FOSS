@@ -2,14 +2,16 @@
   "name": "discord_bot_mac",
   "version": "1.0.0",
   "description": "this is a discord bot made to manage and work over the project of mac HUB",
-  "main": "index.js",
+  "main": "setup.js",
   "scripts": {
     "test": "npm start.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.11.0"
+    "@types/mongodb": "^4.0.7",
+    "discord.js": "^14.11.0",
+    "mongodb": "^5.6.0"
   },
   "devDependencies": {
     "eslint": "^8.42.0"

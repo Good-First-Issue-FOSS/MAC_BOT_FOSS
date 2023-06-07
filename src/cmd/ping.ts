@@ -1,5 +1,6 @@
 //this is a test dierectry for testing all new slsh command before implementing in the actual folder
 
+import  { listProject, listUsers } from '../data/MongoData'
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 const { SlashCommandBuilder } = require('discord.js');
 const wait = require('node:timers/promises').setTimeout;
@@ -38,6 +39,8 @@ module.exports = {
 				//await interaction.guild.members.ban(target);
 				await confirmation.update({ content: `${target.username} has been banned for reason: ${reason}`, components: [] });
 			} else if (confirmation.customId === 'cancel') {
+				await listProject()
+				await listUsers()
 				await confirmation.update({ content: 'Action cancelled', components: [] });
 			}
 		} catch (e) {

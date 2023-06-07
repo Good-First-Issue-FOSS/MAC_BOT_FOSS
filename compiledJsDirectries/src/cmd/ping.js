@@ -1,4 +1,5 @@
 "use strict";
+//this is a test dierectry for testing all new slsh command before implementing in the actual folder
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const MongoData_1 = require("../data/MongoData");
 const discord_js_1 = require("discord.js");
 const { SlashCommandBuilder } = require('discord.js');
 const wait = require('node:timers/promises').setTimeout;
@@ -43,6 +45,8 @@ module.exports = {
                     yield confirmation.update({ content: `${target.username} has been banned for reason: ${reason}`, components: [] });
                 }
                 else if (confirmation.customId === 'cancel') {
+                    yield (0, MongoData_1.listProject)();
+                    yield (0, MongoData_1.listUsers)();
                     yield confirmation.update({ content: 'Action cancelled', components: [] });
                 }
             }
