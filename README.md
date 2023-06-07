@@ -87,7 +87,7 @@ Please open an issue on the GitHub repository if you encounter any problems or h
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [GNU GENERAL PUBLIC LICENSE](LICENSE).
 
 ## Documentation
 
