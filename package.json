@@ -5,7 +5,7 @@
   "main": "setup.js",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint src --max-warnings 0",
+    "lint": "eslint src --max-warnings 0 && prettier src --check",
     "start": "node -r dotenv/config compiledJsDirectories/setup.js",
     "test": "npm start.js"
   },
@@ -21,6 +21,9 @@
     "@typescript-eslint/eslint-plugin": "5.59.9",
     "@typescript-eslint/parser": "5.59.9",
     "eslint": "^8.42.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "prettier": "2.8.8",
     "typescript": "5.1.3"
   }
 }
