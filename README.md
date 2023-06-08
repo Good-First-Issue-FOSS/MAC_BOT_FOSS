@@ -8,8 +8,8 @@ To use MAC_BOT in your Discord server, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/20B81A05D1/MAC_BOT.git`
 2. Install the dependencies: `npm install`
-3. Configure the bot by providing your Discord API token in the ./auth/keys.ts file.
-4. Run the bot: node setup.ts
+3. Configure the bot by copying the `sample.env` file to `.env` and filling in the values.
+4. Run the bot: `npm start`
 
 Make sure you have Node.js and npm installed on your system before proceeding with the installation.
 

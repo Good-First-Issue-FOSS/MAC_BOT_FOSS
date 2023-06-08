@@ -1,7 +1,8 @@
 //this is to get the discord.js required classes
 const { Client, Collection, REST, Events, Routes, GatewayIntentBits } = require('discord.js');
 //this is to get the bot keys
-const { keys } = require('../auth/keys');
+const { loadEnv } = require('./utils/loadEnv');
+const keys = loadEnv();
 //this is to get the node.js classes
 const fs = require('node:fs');
 const path = require('node:path');
