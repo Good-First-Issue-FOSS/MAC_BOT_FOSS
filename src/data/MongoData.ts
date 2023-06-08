@@ -1,7 +1,8 @@
 import { MongoClient, Db, InsertOneResult, WithId } from 'mongodb';
+import { loadEnv } from '../utils/loadEnv';
 
 async function connectToMongoDB(): Promise<Db> {
-    const url = 'mongodb://127.0.0.1:27017'; // Replace with your MongoDB connection URL
+    const url = loadEnv().MONGO_URI;
     const client = new MongoClient(url);
   
     try {
