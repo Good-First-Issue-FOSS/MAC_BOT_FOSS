@@ -7,7 +7,7 @@
     "build": "tsc",
     "lint": "eslint src --max-warnings 0 && prettier src --check",
     "start": "node -r dotenv/config compiledJsDirectories/setup.js",
-    "test": "npm start.js"
+    "test": "echo 'no tests yet'"
   },
   "author": "",
   "license": "ISC",
