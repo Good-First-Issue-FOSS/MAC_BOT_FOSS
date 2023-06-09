@@ -5,17 +5,20 @@
 	</head>
 	<body>
 		<div id="info">Hoi!</div>
-		<a	
-			id="login" 
-			style="display: none;" 
+		<a
+			id="login"
+			style="display: none"
 			href="https://discord.com/api/oauth2/authorize?client_id=1114904309918867496&redirect_uri=http%3A%2F%2Flocalhost%3A53134&response_type=code&scope=identify%20connections%20email"
 		>
-		Identify Yourself
+			Identify Yourself
 		</a>
 		<script>
 			window.onload = () => {
 				const fragment = new URLSearchParams(window.location.hash.slice(1));
-				const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+				const [accessToken, tokenType] = [
+					fragment.get('access_token'),
+					fragment.get('token_type'),
+				];
 
 				if (!accessToken) {
 					return (document.getElementById('login').style.display = 'block');
@@ -26,12 +29,14 @@
 						authorization: `${tokenType} ${accessToken}`,
 					},
 				})
-				.then(result => result.json())
-				.then(response => {
-					const { username, discriminator } = response;
-					document.getElementById('info').innerText += ` ${username}#${discriminator}`;
-				})
-				.catch(console.error);
+					.then((result) => result.json())
+					.then((response) => {
+						const { username, discriminator } = response;
+						document.getElementById(
+							'info',
+						).innerText += ` ${username}#${discriminator}`;
+					})
+					.catch(console.error);
 			};
 		</script>
 	</body>
