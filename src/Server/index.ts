@@ -17,7 +17,7 @@ app.get('/', async (request: Request, response: Response) => {
 			client_id: CLIENT_ID,
 			client_secret: CLIENT_SECRET,
 			grant_type: 'authorization_code',
-			code: code!.toString(),
+			code: code?.toString(),
 			redirect_uri: `http://localhost:${port}`,
 		});
 		const recivedToken = await axios.post(
@@ -25,6 +25,7 @@ app.get('/', async (request: Request, response: Response) => {
 			formData.toString(),
 		);
 		console.log(recivedToken.data);
+		response.sendStatus(200);
 	} else {
 		console.log('There is no code');
 		response.sendStatus(400);
