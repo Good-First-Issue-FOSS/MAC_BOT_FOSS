@@ -11,8 +11,9 @@ const CLIENT_SECRET = loadEnv().CLIENT_SECRET;
 app.get('/', async (request: Request, response: Response) => {
 	console.log(request.query);
 	const { code } = request.query;
-
+	let flag = 0;
 	if (code) {
+		// getting initial token
 		const formData = new url.URLSearchParams({
 			client_id: CLIENT_ID,
 			client_secret: CLIENT_SECRET,
@@ -25,10 +26,50 @@ app.get('/', async (request: Request, response: Response) => {
 			formData.toString(),
 		);
 		console.log(recivedToken.data);
-		response.sendStatus(200);
+
+		// getting user's discord data
+		if (recivedToken.data.expires_in) {
+			const userData = await axios.get(
+				'https://discord.com/api/v10/users/@me',
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${recivedToken.data.access_token}`,
+					},
+				},
+			);
+			console.log(userData.data);
+		} else {
+			console.log('Skipped User Data due to token absence!');
+			flag++;
+		}
+
+		// getting user's github data
+		if (recivedToken.data.expires_in) {
+			const gitData = await axios.get(
+				'https://discord.com/api/v10/users/@me/connections',
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${recivedToken.data.access_token}`,
+					},
+				},
+			);
+			console.log(gitData.data);
+		} else {
+			console.log('Skipped Git Data due to token absence!');
+			flag++;
+		}
+		response.status(200);
 	} else {
 		console.log('There is no code');
-		response.sendStatus(400);
+		flag++;
+		response.status(400);
+	}
+	if (flag == 0) {
+		response.sendFile('index.html', { root: './src/server/' });
+	} else {
+		response.sendFile('index.html', { root: './src/server/' });
 	}
 });
 
