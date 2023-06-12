@@ -9,7 +9,6 @@
     "start-server": "node -r dotenv/config  compiledJsDirectories/setup.js",
     "start-client": "node -r dotenv/config compiledJsDirectories/server/index.js",
     "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
-
     "test": "echo 'no tests yet'"
   },
   "author": "",
