@@ -1,5 +1,5 @@
 export interface UserData {
-	_id: string;
+	id: string;
 	name: string;
 	refresh_token: string;
 	isEmailPresent: boolean;
