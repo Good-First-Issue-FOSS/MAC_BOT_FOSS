@@ -12,10 +12,6 @@ module.exports = {
 		.setName('auth')
 		.setDescription('Authenticates you with github!'),
 	async execute(interaction: ChatInputCommandInteraction) {
-		const target = interaction.options.getUser('target');
-		const reason =
-			interaction.options.getString('reason') ?? 'No reason provided';
-
 		const auth = new ButtonBuilder()
 			.setCustomId('auth')
 			.setLabel('Authenticate me')
@@ -32,7 +28,7 @@ module.exports = {
 		);
 
 		const response = await interaction.reply({
-			content: `Are you sure you want to ban ${target} for reason: ${reason}?`,
+			content: 'Be sure only one Github account is public on your discord ID?',
 			components: [row],
 		});
 

@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint src --max-warnings 0 && prettier src --check",
-    "start": "node -r dotenv/config  compiledJsDirectories/setup.js",
+    "start-server": "node -r dotenv/config  compiledJsDirectories/setup.js",
+    "start-client": "node -r dotenv/config compiledJsDirectories/server/index.js",
+    "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
     "test": "echo 'no tests yet'"
   },
   "author": "",
@@ -24,6 +26,7 @@
     "@types/express": "^4.17.17",
     "@typescript-eslint/eslint-plugin": "5.59.9",
     "@typescript-eslint/parser": "5.59.9",
+    "concurrently": "^8.2.0",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-prettier": "4.2.1",
