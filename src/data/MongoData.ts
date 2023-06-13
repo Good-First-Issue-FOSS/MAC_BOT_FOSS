@@ -1,4 +1,4 @@
-import { MongoClient, Db, InsertOneResult, WithId } from 'mongodb';
+import { MongoClient, Db, InsertOneResult } from 'mongodb';
 import { loadEnv } from '../utils/loadEnv';
 import { UserData } from '../interfaces/UserData';
 
@@ -60,14 +60,14 @@ export async function addUsers(user: UserData): Promise<boolean> {
 	}
 }
 
-export async function listUsers(): Promise<WithId<Document>[]> {
+export async function listUsers(): Promise<UserData[]> {
 	try {
 		const data = await (await connectToMongoDB())
 			.collection('MAC_BOT_USERS')
 			.find()
 			.toArray();
 		console.log(data);
-		return data as WithId<Document>[];
+		return data as unknown as UserData[];
 	} catch (error) {
 		console.error('Error finding users\n', error);
 		throw error;

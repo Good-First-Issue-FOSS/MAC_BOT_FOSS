@@ -6,6 +6,7 @@ import {
 	ChatInputCommandInteraction,
 	SlashCommandBuilder,
 } from 'discord.js';
+import { listUsers } from '../data/MongoData';
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -37,14 +38,24 @@ module.exports = {
 				filter: (i) => i.user.id === interaction.user.id,
 				time: 60_000,
 			});
-
 			if (confirmation.customId === 'auth') {
 				// await interaction.guild.members.ban(target);
-				await confirmation.update({
-					content:
-						'[Click here](https://discord.com/oauth2/authorize?client_id=1114904309918867496&redirect_uri=http%3A%2F%2Flocalhost%3A53134&response_type=code&scope=identify%20email%20connections)',
-					components: [],
-				});
+				const userList = await listUsers();
+				const userObj = userList.find(
+					(userVar) => userVar.id === confirmation.user.id,
+				);
+				if (userObj && userObj.id !== confirmation.user.id) {
+					await confirmation.update({
+						content:
+							'[Click here](https://discord.com/oauth2/authorize?client_id=1114904309918867496&redirect_uri=http%3A%2F%2Flocalhost%3A53134&response_type=code&scope=identify%20email%20connections)',
+						components: [],
+					});
+				} else {
+					await confirmation.update({
+						content: 'You are already authenticated try /roles to get roles',
+						components: [],
+					});
+				}
 			} else if (confirmation.customId === 'cancel') {
 				await confirmation.update({
 					content: 'Action cancelled ...',

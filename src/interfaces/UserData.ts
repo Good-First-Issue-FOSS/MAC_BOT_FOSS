@@ -1,4 +1,7 @@
+import { ObjectId } from 'mongodb';
+
 export interface UserData {
+	_id: ObjectId | undefined;
 	id: string;
 	name: string;
 	refresh_token: string;
