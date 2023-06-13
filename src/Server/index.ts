@@ -33,6 +33,7 @@ app.get('/', async (request: Request, response: Response) => {
 				verified: false,
 				metadata_visibility: 0,
 			},
+			_id: undefined,
 		};
 		if (code) {
 			// getting initial token
@@ -64,11 +65,13 @@ app.get('/', async (request: Request, response: Response) => {
 				console.log(userData.data);
 				if (userData.data.email) {
 					data.id = userData.data.id;
+					data._id = userData.data.id.toString();
 					data.name = userData.data.username;
 					data.isEmailPresent = true;
 					data.email = userData.data.email;
 				} else {
 					data.id = userData.data.id;
+					data._id = userData.data.id.toString();
 					data.name = userData.data.username;
 					data.isEmailPresent = false;
 					problemArray.push('No Email Attached to github Retry!');
