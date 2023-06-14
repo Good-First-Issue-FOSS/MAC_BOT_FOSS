@@ -10,7 +10,7 @@ import {
 	SlashCommandBuilder,
 } from 'discord.js';
 
-module.exports = {
+export default {
 	data: new SlashCommandBuilder()
 		.setName('projects')
 		.setDescription('wanna work on any project?'),

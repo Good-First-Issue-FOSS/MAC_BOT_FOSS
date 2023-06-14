@@ -8,7 +8,7 @@ import {
 } from 'discord.js';
 import { listUsers } from '../data/MongoData';
 
-module.exports = {
+export default {
 	data: new SlashCommandBuilder()
 		.setName('auth')
 		.setDescription('Authenticates you with github!'),

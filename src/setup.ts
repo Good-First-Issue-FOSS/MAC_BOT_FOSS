@@ -20,8 +20,8 @@ const client = new Client({
 	intents: [GatewayIntentBits.Guilds],
 }) as ExtendedClient;
 
-// initinalizing for cmd
-const commands = [];
+// initializing for cmd
+const commands: unknown[] = [];
 client.commands = new Collection();
 
 // When the client is ready, run this code (only once)
@@ -30,25 +30,36 @@ client.once(Events.ClientReady, (c) => {
 });
 
 // searching and reading in cmd
+
 const commandPath = path.join(__dirname, 'cmd');
 const commandFiles = fs
 	.readdirSync(commandPath)
 	.filter((file: string) => file.endsWith('.js'));
-for (const file of commandFiles) {
-	const filePath = path.join(commandPath, file);
-	// eslint-disable-next-line @typescript-eslint/no-var-requires
-	const command = require(filePath);
-	if ('data' in command && 'execute' in command) {
-		console.log('done cmd ' + file);
-		commands.push(command.data.toJSON());
-		client.commands.set(command.data.name, command);
-	} else {
-		console.log(
-			`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`,
-		);
+
+async function loadCommands() {
+	for (const file of commandFiles) {
+		const filePath = path.join(commandPath, file);
+
+		const command = await import(filePath);
+
+		const defaultCommand = command.default;
+		if (
+			defaultCommand != null &&
+			'data' in defaultCommand &&
+			'execute' in defaultCommand
+		) {
+			console.log('done cmd ' + file);
+			commands.push(defaultCommand.data.toJSON());
+			client.commands.set(defaultCommand.data.name, defaultCommand);
+		} else {
+			console.log(
+				`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`,
+			);
+		}
 	}
 }
-// combining intraction with input cmd
+
+// combining interaction with input cmd
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -88,6 +99,7 @@ const rest = new REST().setToken(keys.TOKEN);
 // and deploy your commands!
 (async () => {
 	try {
+		await loadCommands();
 		console.log(
 			`Started refreshing ${commands.length} application (/) commands.`,
 		);
