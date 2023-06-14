@@ -34,29 +34,29 @@ client.once(Events.ClientReady, (c) => {
 const commandPath = path.join(__dirname, 'cmd');
 const commandFiles = fs
 	.readdirSync(commandPath)
-  .filter((file: string) => file.endsWith('.js'));
+	.filter((file: string) => file.endsWith('.js'));
 
 async function loadCommands() {
-  for (const file of commandFiles) {
-    const filePath = path.join(commandPath, file);
+	for (const file of commandFiles) {
+		const filePath = path.join(commandPath, file);
 
-    const command = await import(filePath);
+		const command = await import(filePath);
 
-    const defaultCommand = command.default;
-    if (
-      defaultCommand != null &&
-      'data' in defaultCommand &&
-      'execute' in defaultCommand
-    ) {
-      console.log('done cmd ' + file);
-      commands.push(defaultCommand.data.toJSON());
-      client.commands.set(defaultCommand.data.name, defaultCommand);
-    } else {
-      console.log(
-        `[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`,
-      );
-    }
-  }
+		const defaultCommand = command.default;
+		if (
+			defaultCommand != null &&
+			'data' in defaultCommand &&
+			'execute' in defaultCommand
+		) {
+			console.log('done cmd ' + file);
+			commands.push(defaultCommand.data.toJSON());
+			client.commands.set(defaultCommand.data.name, defaultCommand);
+		} else {
+			console.log(
+				`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`,
+			);
+		}
+	}
 }
 
 // combining interaction with input cmd
@@ -98,8 +98,8 @@ const rest = new REST().setToken(keys.TOKEN);
 
 // and deploy your commands!
 (async () => {
-  try {
-    await loadCommands();
+	try {
+		await loadCommands();
 		console.log(
 			`Started refreshing ${commands.length} application (/) commands.`,
 		);
